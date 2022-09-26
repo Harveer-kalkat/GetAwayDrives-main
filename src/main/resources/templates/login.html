@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="" th:href="@{/style.css}">
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="img">
+        <img th:src="@{/images/imglogin.jpg}">
+    </div>
+<!--    -->
+    <div class="form">
+        <h2>Welcome Back!</h2>
+        <form method="get" th:action="@{verify}" th:object="${user}">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" placeholder="Enter email"  th:field="*{email}"/>
+                <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" />
+            </div>
+
+            <div class="form-group">
+                <label >Password</label>
+                <input type="password" class="form-control" placeholder="Enter email"  th:field="*{password}"/>
+                <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}" />
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox"> Remember me</label>
+            </div>
+            <button type="submit" class="btn" th:href="@{/index}">Sign In</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

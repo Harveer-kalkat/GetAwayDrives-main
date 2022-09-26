@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Get Away drives</title>
+
+    <link rel="stylesheet" href="" th:href="@{/style.css}">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+</head>
+<body>
+<script>
+    function openRegForm()
+    {
+        document.getElementById("registerForm").style.display = "block";
+        document.getElementById("home").style.filter = "blur(2px)";
+        document.getElementById("ride").style.filter = "blur(2px)";
+        document.getElementById("services").style.filter = "blur(2px)";
+    }
+
+    function closeRegForm()
+    {
+        document.getElementById("registerForm").style.display = "none";
+        document.getElementById("home").style.filter = "none";
+        document.getElementById("ride").style.filter = "none";
+        document.getElementById("services").style.filter = "none";
+    }
+    function openLogForm(){
+        document.getElementById("LoginForm").style.display = "block";
+        document.getElementById("home").style.filter = "blur(2px)";
+        document.getElementById("ride").style.filter = "blur(2px)";
+        document.getElementById("services").style.filter = "blur(2px)";
+    }
+    function closeLogForm()
+    {
+        document.getElementById("LoginForm").style.display = "none";
+        document.getElementById("home").style.filter = "none";
+        document.getElementById("ride").style.filter = "none";
+        document.getElementById("services").style.filter = "none";
+    }
+</script>
+<!-- header -->
+<header id="everything">
+    <a href="#" class="logo"><img src="" th:src="@{/images/gtr.png}" alt = "logo"></a>
+
+    <div class="bx bx-menu" id="menu-icon"></div>
+
+    <ul class="navbar">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#ride">Ride</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+    </ul>
+    <div class="header-btn">
+        <a th:href="@{listCar}" class="list_car">List Car</a>
+        <a href="#registerForm" class="sign-up" onclick="openRegForm()">Sign Up</a>
+        <a href="#" class="sign-in" onclick="openLogForm()">Sign In</a>
+        <a th:href="@{logout}" class="sign-in" >Log Out</a>
+
+    </div>
+</header>
+
+<section class="home" id="home">
+    <form action="get"  th:action="@{index}">
+        <div class="input-box">
+            <span>Location</span>
+            <input type="search" name="keyword"  placeholder="Enter Location">
+        </div>
+        <div class="input-box">
+            <span>Pick-Up Date</span>
+            <input type="date" name="">
+        </div>
+        <div class="input-box">
+            <span>Return-Date</span>
+            <input type="date" name="">
+        </div>
+        <input type="submit" name="" class="btn">
+    </form>
+</section>
+<!--Form-->
+<div class="wrapper" id="registerForm">
+    <div class="title">
+        Register Here
+    </div>
+    <div class="social_media">
+        <div class="item">
+            <i class="fab fa-facebook-f"></i>
+        </div>
+        <div class="item">
+            <i class="fab fa-twitter"></i>
+        </div>
+        <div class="item">
+            <i class="fab fa-google-plus-g"></i>
+        </div>
+    </div>
+
+    <form class="form" method="post" th:action="@{register}">
+    <div class="form" >
+
+        <div class="input_field">
+            <input type="text" placeholder="First Name" class="input" name="firstName" required>
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="input_field">
+            <input type="text" placeholder="Last Name" class="input" name="lastName" required>
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="input_field">
+            <input type="email" placeholder="Email" class="input" name="email" required>
+            <i class="far fa-envelope"></i>
+        </div>
+        <div class="input_field">
+            <input type="password" placeholder="Password" class="input" name="password" required>
+            <i class="fas fa-lock"></i>
+        </div>
+        <div class="input_field">
+            <input type="password" placeholder="Re-enter Password" class="input" name="passwordConfirm" required>
+            <i class="fas fa-lock"></i>
+        </div>
+        <div class="input_field">
+            <input type="text" placeholder="Address" class="input" name="address">
+            <i class="fas fa-home"></i>
+        </div>
+        <div class="input_field">
+            <input type="text" placeholder="Phone Number" class="input" name="phoneNumber">
+            <i class="fas fa-phone"></i>
+        </div>
+        <div class="field_cont">
+            <div class="input_field">
+                <input type="text" placeholder="Divers License Number" class="input" name="dlNumber">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <div class="input_field">
+                <input type="date" placeholder="Expiry Date" class="input" name="dlExpiryDateString">
+                <i class="fas fa-wallet"></i>
+            </div>
+        </div>
+        <div class="input_field">
+            <input type="text" placeholder="Issuing country" class="input" name="dlIssuingCountry">
+            <i class="fas fa-home"></i>
+        </div>
+        <!-- <div class="input_field">
+          <label>Upload Vehicle documents</label>
+          <input type="file" placeholder="Upload Vehicle documents" class="input">
+        </div> -->
+        <div class="btn">
+            <button type="submit" class="btn">Sign Up</button>
+        </div>
+        <div class="btn">
+            <a href="#" onclick="closeRegForm()">Close</a>
+        </div>
+
+    </div>
+    </form>
+</div>
+<div class="wrapper" id="LoginForm">
+
+    <form class="form" method="post" th:action="@{login}" th:object="${user}" >
+        <div class="title">
+            Welcome Back! <p th:text="${user.firstName}"></p>
+        </div>
+        <div class="input_field">
+            <input type="text" placeholder="Email" class="input" name="email" required>
+            <i class="far fa-envelope"></i>
+        </div>
+        <div class="input_field">
+            <input type="password" placeholder="Password" class="input" name="password" required>
+            <i class="fas fa-lock"></i>
+        </div>
+        <div class="btn">
+            <button type="submit" class="btn" th:href="@{/index}">Sign In</button>
+        </div>
+        <div class="btn">
+            <button type="button" class="btn" onclick="closeLogForm()">Close</button>
+        </div>
+
+    </form>
+</div>
+
+<!--Ride-->
+<section class="ride" id="ride">
+    <div id="divCheckbox" style="display: none;">
+        <img src="/static/bg4.jpg" >
+    </div>
+    <div class="heading">
+        <span>How it works</span>
+        <h1>Rent with 3 easy steps</h1>
+    </div>
+    <div class="ride-container">
+        <div class="box">
+            <i class='bx bxs-map'></i>
+            <h2>Choose A Location</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga consectetur et quae id deserunt quas asperiores reprehenderit dolore, odio amet adipisci. Sit nihil fuga quos, labore reiciendis ipsa ab cumque?</p>
+        </div>
+        <div class="box">
+            <i class='bx bxs-calendar-check'></i>
+            <h2>Pick-up Date</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga consectetur et quae id deserunt quas asperiores reprehenderit dolore, odio amet adipisci. Sit nihil fuga quos, labore reiciendis ipsa ab cumque?</p>
+        </div>
+        <div class="box">
+            <i class='bx bxs-calendar-star' ></i>
+            <h2>Book A Car</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga consectetur et quae id deserunt quas asperiores reprehenderit dolore, odio amet adipisci. Sit nihil fuga quos, labore reiciendis ipsa ab cumque?</p>
+        </div>
+    </div>
+</section>
+
+<section class="services" id="services">
+    <div class="heading">
+        <span>Best Services</span>
+        <h1>Explore Out Top Deals <br>From Top Rated Users</h1>
+    </div>
+    <div class="services-container">
+        <div class="box">
+            <div class="box-img">
+                <img th:src="@{/images/build.jpg}" alt="img1">
+            </div>
+            <h2></h2>
+            <a th:href="@{byBuild}" class="btn">Search by build</a>
+        </div>
+
+        <div class="box">
+            <div class="box-img">
+                <img th:src="@{/images/type.jpg}" alt="img1">
+            </div>
+            <h2></h2>
+            <a th:href="@{types}" class="btn">Search by type</a>
+        </div>
+
+        <div class="box">
+            <div class="box-img">
+                <img th:src="@{/images/rating.jpg}" alt="img1">
+            </div>
+            <h2></h2>
+            <a href="#" class="btn">Search by Ratings</a>
+        </div>
+    </div>
+
+</section>
+<section class="reviews" id="reviews">
+    <div class="heading">
+        <span>Reviews</span>
+        <h1>What our customers have to say</h1>
+    </div>
+    <div class="reviews-container">
+        <div class="box">
+            <div class="rev-img">
+                <img src="rev1.jpg" th:src="@{/images/rev1.jpg}" alt="">
+            </div>
+            <h2>Akex dolli</h2>
+            <div class="stars">
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star-half'></i>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio magni reprehenderit dignissimos cupiditate laborum impedit sequi illum.</p>
+        </div>
+        <div class="box">
+            <div class="rev-img">
+                <img src="rev2.jpg" th:src="@{/images/rev2.jpg}" alt="">
+            </div>
+            <h2>Akex dolli</h2>
+            <div class="stars">
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star-half'></i>
+
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio magni reprehenderit dignissimos cupiditate laborum impedit sequi illum.</p>
+
+        </div>
+        <div class="box">
+            <div class="rev-img">
+                <img src="rev3.jpg" th:src="@{/images/rev3.jpg}" alt="">
+            </div>
+            <h2>Akex dolli</h2>
+            <div class="stars">
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star-half'></i>
+
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque optio magni reprehenderit dignissimos cupiditate laborum impedit sequi illum.</p>
+
+        </div>
+    </div>
+</section>
+<div class="copyright">
+    <p>&#169; GetAwayDrives All Rights Reserved.</p>
+    <div class="social">
+        <a href="#"><i class="bx bxl-facebook"></i></a>
+        <a href="#"><i class="bx bxl-twitter"></i></a>
+        <a href="#"><i class="bx bxl-instagram"></i></a>
+    </div>
+</div>
+
+<!-- js  -->
+<script src = "main.js"></script>
+</body>
+</html>
