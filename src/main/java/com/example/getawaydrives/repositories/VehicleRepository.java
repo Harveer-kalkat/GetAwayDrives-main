@@ -9,7 +9,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
     List<Vehicle> findByModelContaining(String kw);
 
     List<Vehicle> findVehicleByLicensePlateNumber(String licensePlateNumber);
-    List<Vehicle> findByNameContaining (String kw);
+//    List<Vehicle> findByNameContaining (String kw);
     List<Vehicle> findByBuild(String build);
     List<Vehicle> findByType(String type);
 }
