@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/classes/com/example/getawaydrives-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/GetAwayDrives-0.0.1-SNAPSHOT.jar
